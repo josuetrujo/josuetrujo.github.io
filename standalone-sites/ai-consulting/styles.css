@@ -344,18 +344,19 @@ section { padding-block: var(--section-y); position: relative; }
 .hero-brand-lockup {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1.1rem;
+  max-width: 38ch;
 }
 
 .hero-brand-logo {
-  width: clamp(48px, 5vw, 64px);
+  width: clamp(58px, 6vw, 82px);
   height: auto;
   flex-shrink: 0;
 }
 
 .hero-brand-name {
   font-family: var(--body);
-  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-size: clamp(1.45rem, 2.45vw, 2rem);
   line-height: 1;
   font-weight: 750;
   letter-spacing: -0.015em;
@@ -372,7 +373,7 @@ section { padding-block: var(--section-y); position: relative; }
 
 .hero-brand-tagline {
   margin-top: 0.35rem;
-  font-size: 0.68rem;
+  font-size: clamp(0.7rem, 0.9vw, 0.82rem);
   color: var(--muted);
 }
 
