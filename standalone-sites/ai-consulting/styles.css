@@ -337,14 +337,48 @@ section { padding-block: var(--section-y); position: relative; }
 .hero-meta {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.6rem;
   padding-bottom: 0.5rem;
 }
 
-.hero-intro-logo {
-  width: clamp(64px, 7vw, 92px);
+.hero-brand-lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.hero-brand-logo {
+  width: clamp(48px, 5vw, 64px);
   height: auto;
-  margin-bottom: 0.25rem;
+  flex-shrink: 0;
+}
+
+.hero-brand-name {
+  font-family: var(--body);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  line-height: 1;
+  font-weight: 750;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.hero-brand-tagline,
+.hero-location {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+}
+
+.hero-brand-tagline {
+  margin-top: 0.35rem;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.hero-location {
+  font-size: 0.72rem;
+  color: var(--accent);
 }
 
 .hero-meta p { color: var(--ink-soft); max-width: 38ch; }
@@ -837,11 +871,6 @@ footer {
   color: var(--ink-soft);
   margin-bottom: 1.25rem;
   max-width: 60ch;
-}
-.prose p:first-of-type::first-line {
-  font-variant: small-caps;
-  letter-spacing: 0.05em;
-  font-weight: 500;
 }
 
 .prose h3 {
