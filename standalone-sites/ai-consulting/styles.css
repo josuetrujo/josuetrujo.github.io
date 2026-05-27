@@ -1,6 +1,6 @@
 /* ==========================================================================
-   LUMEN AI — Editorial Design System
-   Replace "LUMEN AI" branding throughout site as needed.
+   Josue Trujillo — AI & Workflow Consultant
+   Editorial design system. Warm beige + cobalt accent + JT monogram.
    ========================================================================== */
 
 :root {
@@ -10,8 +10,8 @@
   --ink: #1a1614;
   --ink-soft: #3d3530;
   --muted: #8a7f74;
-  --accent: #d2491b;
-  --accent-dark: #a8370e;
+  --accent: #2b3990;        /* Cobalt blue — matches JT logo */
+  --accent-dark: #1e2870;   /* Deeper cobalt for hover states */
   --line: #d8cfc0;
 
   /* Type */
@@ -154,28 +154,47 @@ section { padding-block: var(--section-y); position: relative; }
 }
 
 .brand {
-  font-family: var(--display);
-  font-size: 1.4rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.7rem;
+  letter-spacing: -0.015em;
+  color: var(--ink);
 }
 
-.brand .mark {
-  width: 22px; height: 22px;
-  border-radius: 50%;
-  background: var(--ink);
-  position: relative;
-  display: inline-block;
+.brand-logo {
+  height: 36px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
 }
-.brand .mark::after {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border-radius: 50%;
-  background: var(--accent);
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0.25rem;
+}
+
+.brand-name {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.brand-tag {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+@media (max-width: 480px) {
+  .brand-tag { display: none; }
+  .brand-logo { height: 32px; }
+  .brand-name { font-size: 1.05rem; }
 }
 
 .nav-links {
@@ -421,7 +440,7 @@ section { padding-block: var(--section-y); position: relative; }
   position: relative;
 }
 
-.svc-card:hover { background: rgba(210, 73, 27, 0.04); }
+.svc-card:hover { background: rgba(43, 57, 144, 0.05); }
 
 .svc-num {
   font-family: var(--mono);
@@ -580,7 +599,7 @@ section { padding-block: var(--section-y); position: relative; }
   position: absolute;
   top: -50%; right: -20%;
   width: 80%; height: 200%;
-  background: radial-gradient(circle, rgba(210, 73, 27, 0.25), transparent 60%);
+  background: radial-gradient(circle, rgba(43, 57, 144, 0.32), transparent 60%);
   pointer-events: none;
 }
 
@@ -898,4 +917,108 @@ footer {
   content: "→";
   color: var(--accent);
   font-weight: 600;
+}
+
+/* ==========================================================================
+   Real-life examples block (home page)
+   ========================================================================== */
+
+.examples {
+  background: var(--bg-soft);
+}
+
+.examples-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+@media (min-width: 760px) {
+  .examples-list { grid-template-columns: 1fr 1fr; }
+  .examples-list li:nth-child(odd) { border-right: 1px solid var(--line); }
+}
+
+.examples-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 1.4rem 1.5rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 1.05rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  font-family: var(--body);
+}
+
+.examples-list li::before {
+  content: "→";
+  color: var(--accent);
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transform: translateY(2px);
+}
+
+/* ==========================================================================
+   Contact: filter note + Tally embed
+   ========================================================================== */
+
+.form-filter-note {
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+
+.form-filter-note strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.tally-embed-wrap {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.tally-embed-wrap iframe {
+  width: 100%;
+  min-height: 820px;
+  border: 0;
+  display: block;
+  background: transparent;
+}
+
+@media (min-width: 900px) {
+  .tally-embed-wrap iframe { min-height: 760px; }
+}
+
+/* ==========================================================================
+   Footer logo
+   ========================================================================== */
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  height: 52px;
+  width: auto;
+  display: block;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
 }
