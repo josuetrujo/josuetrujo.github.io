@@ -31,7 +31,12 @@ jobs:
       - name: Merge standalone sites
         run: |
           if [ -d standalone-sites ]; then
-            rsync -av --delete standalone-sites/ public/
+            find standalone-sites -mindepth 1 -maxdepth 1 -type d -print | while IFS= read -r site_dir; do
+              site_name="$(basename "$site_dir")"
+              echo "Merging standalone site: ${site_name}"
+              mkdir -p "public/${site_name}"
+              rsync -av --delete "${site_dir}/" "public/${site_name}/"
+            done
           else
             echo "No standalone-sites directory found; skipping merge."
           fi
