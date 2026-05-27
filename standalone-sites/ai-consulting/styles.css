@@ -16,6 +16,7 @@
 
   /* Type */
   --display: "Fraunces", "Times New Roman", serif;
+  --display-large: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
   --body: "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
 
@@ -73,15 +74,21 @@ h1, h2, h3, h4 {
 }
 
 .display-xl {
+  font-family: var(--display-large);
   font-size: clamp(3rem, 9vw, 8.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  font-variation-settings: normal;
 }
 
 .display-l {
+  font-family: var(--display-large);
   font-size: clamp(2.25rem, 6vw, 5rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  font-variation-settings: normal;
 }
 
 .display-m {
@@ -316,10 +323,11 @@ section { padding-block: var(--section-y); position: relative; }
 
 .hero-headline {
   font-size: clamp(2.75rem, 8.5vw, 8rem);
-  line-height: 0.92;
-  letter-spacing: -0.04em;
-  font-family: var(--display);
-  font-variation-settings: "opsz" 144, "SOFT" 30;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  font-family: var(--display-large);
+  font-weight: 600;
+  font-variation-settings: normal;
 }
 
 .hero-headline .accent {
@@ -963,26 +971,8 @@ footer {
 }
 
 /* ==========================================================================
-   Contact: filter note + Tally embed
+   Contact: Tally embed
    ========================================================================== */
-
-.form-filter-note {
-  background: var(--bg-soft);
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
-  padding: 1.4rem 1.6rem;
-  margin-bottom: 2rem;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  line-height: 1.55;
-  color: var(--ink-soft);
-  max-width: 56ch;
-}
-
-.form-filter-note strong {
-  color: var(--ink);
-  font-weight: 600;
-}
 
 .tally-embed-wrap {
   width: 100%;
