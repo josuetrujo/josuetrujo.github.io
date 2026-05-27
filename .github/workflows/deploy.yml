@@ -28,6 +28,13 @@ jobs:
         run: npm ci
       - name: Build Quartz
         run: npx quartz build
+      - name: Merge standalone sites
+        run: |
+          if [ -d standalone-sites ]; then
+            rsync -av --delete standalone-sites/ public/
+          else
+            echo "No standalone-sites directory found; skipping merge."
+          fi
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
