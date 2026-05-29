@@ -943,7 +943,7 @@ footer {
   font-size: clamp(2rem, 4vw, 3rem);
   letter-spacing: -0.025em;
 }
-.svc-detail .deliverables {
+.svc-detail .service-list {
   list-style: none;
   display: grid;
   gap: 0.8rem;
@@ -951,14 +951,25 @@ footer {
   padding-top: 1.5rem;
   border-top: 1px solid var(--line);
 }
-.svc-detail .deliverables li {
+.list-label {
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.list-label + .service-list {
+  margin-top: 0.75rem;
+}
+.svc-detail .service-list li {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.85rem;
   font-size: 0.97rem;
   color: var(--ink-soft);
 }
-.svc-detail .deliverables li::before {
+.svc-detail .service-list li::before {
   content: "→";
   color: var(--accent);
   font-weight: 600;
