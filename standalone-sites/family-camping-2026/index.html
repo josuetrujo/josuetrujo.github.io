@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Camping Options | July-August 2026</title>
+  <meta name="description" content="Lake camping options for up to 20 people, with Modesto and Citrus Heights drive estimates, Recreation.gov links, prices, and available date windows." />
+  <meta property="og:title" content="Family Camping Options" />
+  <meta property="og:description" content="A family-friendly shortlist of lake camping options for July-August 2026." />
+  <meta property="og:image" content="lake-camping-hero.jpg" />
+  <style>
+    :root {
+      --forest: #173b2f;
+      --forest-2: #0f2922;
+      --water: #24767b;
+      --sun: #f0b257;
+      --clay: #b85f3d;
+      --paper: #faf7ef;
+      --paper-2: #f1eadc;
+      --ink: #1f2522;
+      --muted: #5f6862;
+      --line: rgba(31, 37, 34, 0.14);
+      --white: #ffffff;
+      --shadow: 0 18px 48px rgba(21, 42, 34, 0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .hero {
+      min-height: 88svh;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+      background: var(--forest);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(90deg, rgba(10, 24, 19, 0.82), rgba(10, 24, 19, 0.50) 42%, rgba(10, 24, 19, 0.18)),
+        linear-gradient(0deg, rgba(10, 24, 19, 0.74), rgba(10, 24, 19, 0.08) 58%),
+        url("lake-camping-hero.jpg");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.01);
+    }
+
+    .wrap {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-inner {
+      padding: 44px 0 58px;
+      color: var(--white);
+      max-width: 840px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: #f7d7a0;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.8rem, 8vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      margin: 22px 0 0;
+      max-width: 650px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: clamp(1.04rem, 2vw, 1.28rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 18px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 800;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--sun);
+      color: #1e241f;
+      border-color: var(--sun);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: -34px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
+    }
+
+    .summary-item {
+      background: var(--white);
+      padding: 22px;
+      min-height: 116px;
+    }
+
+    .summary-item strong {
+      display: block;
+      color: var(--forest);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .summary-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    main {
+      padding: 56px 0 80px;
+    }
+
+    section + section {
+      margin-top: 64px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.55fr);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--forest-2);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .note {
+      border-left: 4px solid var(--water);
+      background: #eaf4f2;
+      padding: 16px 18px;
+      border-radius: 0 8px 8px 0;
+      color: #23433c;
+    }
+
+    .folsom-section {
+      margin-top: 0;
+    }
+
+    .folsom-kicker {
+      color: var(--clay);
+      font-size: 0.8rem;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .folsom-title {
+      max-width: 940px;
+      font-size: clamp(3rem, 7vw, 6.6rem);
+      letter-spacing: -0.04em;
+    }
+
+    .folsom-lede {
+      max-width: 820px;
+      margin: 18px 0 26px;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+    }
+
+    .folsom-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      gap: 0;
+      overflow: hidden;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .folsom-feature img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+    }
+
+    .folsom-feature-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      padding: clamp(24px, 4vw, 42px);
+      background: #fffdf8;
+    }
+
+    .folsom-drive {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .folsom-drive div {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: var(--white);
+    }
+
+    .folsom-drive b {
+      display: block;
+      color: var(--forest-2);
+      font-size: 1.15rem;
+    }
+
+    .folsom-drive span {
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+    }
+
+    .gear-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .gear-panel,
+    .folsom-panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 28px rgba(21, 42, 34, 0.08);
+      padding: 22px;
+    }
+
+    .gear-panel h3,
+    .folsom-panel h3 {
+      font-size: 1.35rem;
+      margin-bottom: 12px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .mini-list li {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      color: var(--muted);
+    }
+
+    .mini-list b {
+      color: var(--forest-2);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .photo-card {
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fffdf8;
+    }
+
+    .photo-card img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+    }
+
+    .photo-card figcaption {
+      padding: 10px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 28px rgba(21, 42, 34, 0.08);
+      overflow: hidden;
+    }
+
+    .card-top {
+      padding: 19px 19px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .rank {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: var(--white);
+      font-size: 0.9rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      color: var(--forest-2);
+      font-size: 1.28rem;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--paper-2);
+      color: #43534c;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .pill.group {
+      background: #e5f0dd;
+      color: #2e5a2d;
+    }
+
+    .pill.favorite {
+      background: #fff0d2;
+      color: #825218;
+    }
+
+    .card-body {
+      display: grid;
+      gap: 14px;
+      padding: 17px 19px 19px;
+      flex: 1;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .fact {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fffdf8;
+    }
+
+    .fact b {
+      display: block;
+      color: var(--forest-2);
+      font-size: 1rem;
+      line-height: 1.1;
+    }
+
+    .fact span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-top: 4px;
+    }
+
+    .dates {
+      display: grid;
+      gap: 8px;
+    }
+
+    .dates strong {
+      color: var(--forest-2);
+      font-size: 0.86rem;
+    }
+
+    .dates p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .detail-stack {
+      display: grid;
+      gap: 10px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+    }
+
+    .detail-stack div {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .detail-stack b {
+      color: var(--forest-2);
+    }
+
+    .card-link {
+      display: inline-flex;
+      justify-content: center;
+      margin-top: auto;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: var(--forest);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 900;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .filter {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--forest-2);
+      border-radius: 8px;
+      padding: 11px 13px;
+      font: inherit;
+      font-weight: 800;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: 0 12px 28px rgba(21, 42, 34, 0.07);
+    }
+
+    table {
+      width: 100%;
+      min-width: 1320px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f5efe3;
+      color: var(--forest-2);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    td {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    td:first-child {
+      color: var(--forest-2);
+      font-weight: 900;
+    }
+
+    .table-link {
+      color: var(--water);
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      background: var(--forest-2);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 32px 0;
+      font-size: 0.92rem;
+    }
+
+    .footer a {
+      color: var(--sun);
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .summary,
+      .cards,
+      .gear-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .folsom-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .wrap {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .hero {
+        min-height: 82svh;
+      }
+
+      .hero-inner {
+        padding-bottom: 42px;
+      }
+
+      .summary,
+      .cards,
+      .facts,
+      .gear-grid,
+      .folsom-drive {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        margin-top: 0;
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+      }
+
+      main {
+        padding-top: 42px;
+      }
+
+      .btn,
+      .card-link,
+      .filter {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Family camping shortlist</div>
+      <h1>Lake camping options for late summer.</h1>
+      <p class="hero-copy">I checked Recreation.gov for tent-friendly campgrounds that could work for up to 20 people, either in a group campsite or by reserving several nearby sites together. The search window is July 17 through August 31, 2026.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#best">See best picks</a>
+        <a class="btn btn-primary" href="#lake-day">Folsom Lake</a>
+        <a class="btn btn-ghost" href="#all-options">Compare all options</a>
+        <a class="btn btn-ghost" href="camping-options.csv" download>Download CSV</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="summary" aria-label="Planning summary">
+      <div class="summary-item">
+        <strong>20</strong>
+        <span>people planned for tent camping</span>
+      </div>
+      <div class="summary-item">
+        <strong>2 origins</strong>
+        <span>drive estimates show Modesto first</span>
+      </div>
+      <div class="summary-item">
+        <strong>15 min</strong>
+        <span>goal for lake access when possible</span>
+      </div>
+      <div class="summary-item">
+        <strong>Jul 17</strong>
+        <span>first arrival date checked</span>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="wrap folsom-section" id="lake-day">
+      <div class="folsom-kicker">Full day-trip option</div>
+      <h2 class="folsom-title">Folsom Lake can be the trip.</h2>
+      <p class="folsom-lede">Folsom Lake is one of the main choices alongside Tahoe and Lake Alpine, especially if we want more lake time, less reservation stress, and an easier drive home the same day.</p>
+
+      <div class="folsom-feature">
+        <img src="folsom-granite-bay.jpg" alt="Granite Bay shoreline at Folsom Lake" loading="eager" />
+        <div class="folsom-feature-copy">
+          <h3>Granite Bay or Beals Point</h3>
+          <p>Folsom Lake is near my home, while most of the family is coming from Modesto. We can make this a full lake day with food, shade, paddle boards, the inflatable boat, swimming, beach time, and an easier drive home at the end.</p>
+          <div class="folsom-drive" aria-label="Folsom Lake drive estimates">
+            <div><b>about 2 hr 5 min</b><span>from Modesto, about 95 mi</span></div>
+            <div><b>about 25 min</b><span>from Citrus Heights, about 15 mi</span></div>
+          </div>
+          <ul class="mini-list">
+            <li><b>Granite Bay Main Beach:</b> good for beach access, group picnic areas, toilets, water faucets, and BBQ stations.</li>
+            <li><b>Beals Point:</b> good for families, beach time, swimming, fishing, hiking, picnic shade, and campground facilities nearby.</li>
+            <li><b>Timing:</b> California State Parks notes the main Folsom Lake recreation season is usually May through Labor Day, but beach access depends on reservoir level.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gear-grid">
+        <div class="gear-panel">
+          <h3>What we can bring</h3>
+          <ul class="mini-list">
+            <li><b>3 paddle boards</b> for calm-water exploring near shore.</li>
+            <li><b>1 small inflatable boat</b> for easy lake time if conditions are safe.</li>
+            <li><b>Best lake setup:</b> choose spots with beach access, parking, toilets, and gentle launch areas.</li>
+            <li><b>Safety note:</b> everyone should bring or wear properly fitted life jackets, especially kids and anyone using the boards or boat.</li>
+          </ul>
+        </div>
+
+        <div class="folsom-panel">
+          <h3>Why this option works</h3>
+          <ul class="mini-list">
+            <li><b>Easier logistics:</b> no overnight gear, fewer reservations, and simpler timing.</li>
+            <li><b>Still a real lake day:</b> beach, swimming, paddle boards, inflatable boat, food, and shade.</li>
+            <li><b>Good family midpoint:</b> doable from Modesto, very close to Citrus Heights, and easier for anyone who cannot camp overnight.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="photo-grid" aria-label="Folsom Lake photos">
+        <figure class="photo-card">
+          <img src="folsom-beals-point.jpg" alt="Beals Point beach area at Folsom Lake" loading="lazy" />
+          <figcaption>Beals Point at Folsom Lake. Photo: UncleVinny, CC BY 3.0 via Wikimedia Commons.</figcaption>
+        </figure>
+        <figure class="photo-card">
+          <img src="folsom-beals-dusk.jpg" alt="Folsom Lake at Beals Point near dusk" loading="lazy" />
+          <figcaption>Beals Point near dusk. Photo: Noah_Loverbear, CC BY-SA 3.0 via Wikimedia Commons.</figcaption>
+        </figure>
+        <figure class="photo-card">
+          <img src="folsom-granite-bay.jpg" alt="Granite Bay shoreline at Folsom Lake" loading="lazy" />
+          <figcaption>Granite Bay at Folsom Lake. Photo: Noah_Loverbear, CC BY-SA 3.0 via Wikimedia Commons.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="wrap" id="best">
+      <div class="section-head">
+        <h2>Best camping places to start.</h2>
+        <p>These are the strongest overnight camping matches: group-site friendly, close enough to a lake or reservoir, and useful 2-night or 3-night availability when checked.</p>
+      </div>
+      <div class="cards" id="bestCards"></div>
+    </section>
+
+    <section class="wrap">
+      <div class="section-head">
+        <h2>Three strong trip options.</h2>
+        <div class="note">
+          For overnight camping, start with the group-site choices below, then compare Tahoe and Lake Alpine if we want a more familiar mountain-lake trip. Folsom Lake is handled separately above because it is a full day-trip option, not part of the overnight campground comparison.
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="all-options">
+      <div class="section-head">
+        <h2>All checked options.</h2>
+        <p>Prices, date windows, amenities, and review signals came from Recreation.gov on July 5, 2026. Availability can change quickly.</p>
+      </div>
+
+      <div class="controls" aria-label="Option filters">
+        <select class="filter" id="fitFilter" aria-label="Filter by camping setup">
+          <option value="all">All setups</option>
+          <option value="group">Group-site friendly</option>
+          <option value="multi">Multiple sites needed</option>
+        </select>
+        <select class="filter" id="areaFilter" aria-label="Filter by area">
+          <option value="all">All areas</option>
+          <option value="Tahoe">Tahoe</option>
+          <option value="Lake Alpine">Lake Alpine</option>
+          <option value="Union Valley / Ice House">Union Valley / Ice House</option>
+          <option value="Stumpy Meadows / Sugar Pine">Stumpy Meadows / Sugar Pine</option>
+          <option value="French Meadows / Loon Lake">French Meadows / Loon Lake</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Campground</th>
+              <th>Area / lake fit</th>
+              <th>Price</th>
+              <th>Drive estimates</th>
+              <th>Setup</th>
+              <th>Amenities</th>
+              <th>Recommendation</th>
+              <th>Review signal</th>
+              <th>2-night arrivals</th>
+              <th>3-night arrivals</th>
+              <th>Link</th>
+            </tr>
+          </thead>
+          <tbody id="optionsTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>Note:</strong> This is a planning page, not a reservation. Before booking, open the Recreation.gov link, confirm the exact campsite map, check vehicle limits, and make sure the selected sites can fit the whole group together.</p>
+      <p>Sources: <a href="https://www.recreation.gov/" target="_blank" rel="noopener">Recreation.gov</a>, <a href="https://www.parks.ca.gov/?page_id=500" target="_blank" rel="noopener">Folsom Lake State Recreation Area</a>, <a href="https://www.parks.ca.gov/?page_id=10916" target="_blank" rel="noopener">California State Parks: Granite Bay and Beals Point</a>, and Wikimedia Commons photo credits shown under each image.</p>
+    </div>
+  </footer>
+
+  <script src="camping-options-data.js"></script>
+  <script src="camping-details.js"></script>
+  <script>
+    const embeddedOptions = [];
+    const options = window.campingOptions || embeddedOptions;
+
+    const bestCards = document.getElementById("bestCards");
+    const optionsTable = document.getElementById("optionsTable");
+    const fitFilter = document.getElementById("fitFilter");
+    const areaFilter = document.getElementById("areaFilter");
+    const detailMap = window.campingDetails || {};
+
+    options.forEach((option) => {
+      const id = option.url.split("/").filter(Boolean).pop();
+      Object.assign(option, { id }, detailMap[id] || {});
+    });
+
+    function badge(option) {
+      const badges = [];
+      if (option.group) badges.push('<span class="pill group">Group-site friendly</span>');
+      if (option.favorite) badges.push('<span class="pill favorite">Favorite area</span>');
+      badges.push(`<span class="pill">${option.area}</span>`);
+      return badges.join("");
+    }
+
+    function renderBest() {
+      bestCards.innerHTML = options
+        .filter((option) => option.top)
+        .map((option) => `
+          <article class="card">
+            <div class="card-top">
+              <span class="rank">${option.rank}</span>
+              <h3>${option.name}</h3>
+              <div class="pill-row">${badge(option)}</div>
+            </div>
+            <div class="card-body">
+              <p>${option.note}</p>
+              <div class="facts">
+                <div class="fact"><b>${option.price}</b><span>per night</span></div>
+                <div class="fact"><b>${option.modestoDrive || "See table"}</b><span>from Modesto ${option.modestoMiles ? "(" + option.modestoMiles + ")" : ""}</span></div>
+                <div class="fact"><b>${option.citrusDrive || option.drive}</b><span>from Citrus Heights ${option.citrusMiles ? "(" + option.citrusMiles + ")" : ""}</span></div>
+                <div class="fact"><b>${option.sites}</b><span>site setup</span></div>
+                <div class="fact"><b>${option.lake}</b><span>lake fit</span></div>
+              </div>
+              <div class="dates">
+                <strong>2-night starts</strong>
+                <p>${option.two}</p>
+                <strong>3-night starts</strong>
+                <p>${option.three}</p>
+              </div>
+              <div class="detail-stack">
+                <div><b>Amenities:</b> ${option.amenitiesSummary || "Open the listing to confirm amenities."}</div>
+                <div><b>Recommendation:</b> ${option.recommendation || option.note}</div>
+                <div><b>Review signal:</b> ${option.reviewSummary || "No rating summary available."}</div>
+                <div><b>Listing note:</b> ${option.listingSummary || "See Recreation.gov for current details."}</div>
+              </div>
+              <a class="card-link" href="${option.url}" target="_blank" rel="noopener">View on Recreation.gov</a>
+            </div>
+          </article>
+        `)
+        .join("");
+    }
+
+    function renderTable() {
+      const fit = fitFilter.value;
+      const area = areaFilter.value;
+      const rows = options.filter((option) => {
+        if (fit === "group" && !option.group) return false;
+        if (fit === "multi" && option.group) return false;
+        if (area !== "all" && option.area !== area) return false;
+        return true;
+      });
+
+      optionsTable.innerHTML = rows.map((option) => `
+        <tr>
+          <td>${option.name}</td>
+          <td>${option.area}<br>${option.lake}</td>
+          <td>${option.price}</td>
+          <td><strong>Modesto:</strong> ${option.modestoDrive || "Estimate unavailable"} ${option.modestoMiles ? "(" + option.modestoMiles + ")" : ""}<br><strong>Citrus Heights:</strong> ${option.citrusDrive || option.drive || "Estimate unavailable"} ${option.citrusMiles ? "(" + option.citrusMiles + ")" : ""}</td>
+          <td>${option.setup}<br>${option.sites}</td>
+          <td>${option.amenitiesSummary || "Open listing to confirm."}</td>
+          <td>${option.recommendation || "Check the campground map before booking."}<br><br><strong>${option.caution || ""}</strong></td>
+          <td>${option.reviewSummary || "No rating summary available."}</td>
+          <td>${option.two}</td>
+          <td>${option.three}</td>
+          <td><a class="table-link" href="${option.url}" target="_blank" rel="noopener">Open</a></td>
+        </tr>
+      `).join("");
+    }
+
+    renderBest();
+    renderTable();
+    fitFilter.addEventListener("change", renderTable);
+    areaFilter.addEventListener("change", renderTable);
+  </script>
+</body>
+</html>

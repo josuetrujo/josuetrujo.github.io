@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Prototype: do not index; mature imagery must not appear in social/search previews -->
+<meta name="robots" content="noindex, nofollow, noimageindex">
+<title>Jeff Lujan — Private Portraiture</title>
+<style>
+  :root{
+    --bg:#0d0d0f; --bg-2:#151518; --stage:#0a0a0b;
+    --ink:#f1ede6; --muted:#a39e95; --line:#2a2a2e;
+    --accent:#c9a96a; --accent-ink:#1a1408;
+    --stage-h:clamp(360px, 64vh, 760px);
+    --serif:"Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:.01em;line-height:1.1;margin:0}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin:0 0 1rem}
+  a{color:inherit}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:48px;padding:.7rem 1.6rem;border-radius:2px;
+       font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid var(--accent);
+       background:var(--accent);color:var(--accent-ink);font-weight:600;text-decoration:none;transition:opacity .2s}
+  .btn:hover{opacity:.88}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--accent);opacity:1}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  /* ---------- Age gate ---------- */
+  #gate{position:fixed;inset:0;z-index:1000;background:radial-gradient(120% 100% at 50% 0%, #18181c 0%, #0a0a0b 70%);
+        display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .panel{max-width:540px;text-align:center}
+  #gate h1{font-size:clamp(2.4rem,6vw,3.6rem);margin:.4rem 0 1.2rem}
+  #gate p{color:var(--muted);max-width:42ch;margin:0 auto 1.6rem}
+  #gate .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:1.4rem}
+  #gate .privacy{font-size:.78rem;color:#6f6a62}
+  body.locked{overflow:hidden}
+  #site{display:none}
+  body.entered #site{display:block}
+  body.entered #gate{display:none}
+
+  /* ---------- Header ---------- */
+  header.site{position:sticky;top:0;z-index:50;background:rgba(13,13,15,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header.site .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--serif);font-size:1.3rem;letter-spacing:.02em}
+  nav.main{display:flex;gap:1.4rem;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  nav.main a{text-decoration:none}
+  nav.main a:hover{color:var(--ink)}
+  @media(max-width:680px){nav.main{display:none}}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:clamp(4rem,12vh,9rem) 0 clamp(3rem,8vh,6rem)}
+  .hero h1{font-size:clamp(2.6rem,7vw,5rem);max-width:16ch;margin:.6rem 0 1.4rem}
+  .hero p{color:var(--muted);max-width:54ch;font-size:1.05rem;margin:0 0 2rem}
+  .hero .actions{display:flex;gap:14px;flex-wrap:wrap}
+
+  .statement{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:4rem 0}
+  .statement p{font-family:var(--serif);font-size:clamp(1.4rem,3vw,2rem);line-height:1.35;max-width:30ch;color:var(--ink)}
+  .statement .sub{font-family:var(--sans);font-size:1rem;color:var(--muted);max-width:60ch;margin-top:1.4rem}
+
+  .section{padding:clamp(3rem,8vh,6rem) 0}
+  .section > .head{margin-bottom:2.4rem;max-width:60ch}
+  .section .head p{color:var(--muted)}
+
+  /* ---------- Carousel ---------- */
+  .carousel{margin:0 0 4.5rem}
+  .carousel .c-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+  .carousel .c-title{font-family:var(--serif);font-size:1.6rem}
+  .carousel .c-desc{color:var(--muted);font-size:.95rem;max-width:48ch}
+  .stage{position:relative;height:var(--stage-h);background:var(--stage);border:1px solid var(--line);overflow:hidden;
+         display:flex;align-items:center;justify-content:center;touch-action:pan-y}
+  .stage img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;
+             opacity:0;position:absolute;transition:opacity .5s ease}
+  .stage img.active{opacity:1;position:relative}
+  .reduce .stage img{transition:none}
+  .count{position:absolute;top:12px;right:14px;background:rgba(0,0,0,.55);color:#fff;font-size:.74rem;
+         letter-spacing:.12em;padding:.3rem .6rem;border-radius:2px}
+  .arrow{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;
+         border:1px solid var(--line);background:rgba(10,10,11,.55);color:#fff;font-size:1.2rem;cursor:pointer;
+         display:flex;align-items:center;justify-content:center;transition:background .2s}
+  .arrow:hover{background:rgba(201,169,106,.9);color:var(--accent-ink)}
+  .arrow.prev{left:12px}.arrow.next{right:12px}
+  .controls{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.9rem;flex-wrap:wrap}
+  .dots{display:flex;gap:8px;flex-wrap:wrap}
+  .dot{width:12px;height:12px;min-width:12px;padding:0;border-radius:50%;border:1px solid var(--muted);background:transparent;cursor:pointer}
+  .dot[aria-current="true"]{background:var(--accent);border-color:var(--accent)}
+  .dot-tap{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px} /* 44px effective with padding row */
+  .playbtn{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:.4rem 1rem;border:1px solid var(--line);
+           background:transparent;color:var(--ink);border-radius:2px;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+  .playbtn:hover{border-color:var(--accent)}
+  .progress{height:2px;background:var(--line);margin-top:.6rem;overflow:hidden}
+  .progress > span{display:block;height:100%;width:0;background:var(--accent)}
+  .caption{color:var(--muted);font-size:.9rem;margin-top:.7rem;min-height:1.2em}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+  /* ---------- Inquiry ---------- */
+  .inquiry{background:var(--bg-2);border-top:1px solid var(--line)}
+  .inquiry .grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+  @media(max-width:760px){.inquiry .grid{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.1rem}
+  .field label{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .field input,.field select,.field textarea{background:#0c0c0e;border:1px solid var(--line);color:var(--ink);
+        padding:.7rem .8rem;border-radius:2px;font:inherit}
+  .note{font-size:.8rem;color:#6f6a62;margin-top:.6rem}
+  .proto-flag{background:rgba(201,169,106,.12);border:1px solid var(--accent);color:var(--accent);
+        font-size:.74rem;letter-spacing:.06em;padding:.5rem .8rem;border-radius:2px;margin-bottom:1.2rem}
+
+  footer.site{border-top:1px solid var(--line);padding:2.4rem 0;color:#6f6a62;font-size:.82rem}
+  footer.site .row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:center}
+  footer.site button.reset{background:none;border:0;color:#6f6a62;text-decoration:underline;cursor:pointer;font:inherit}
+</style>
+</head>
+<body class="locked">
+
+<!-- ============ 18+ AGE GATE ============ -->
+<div id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-h" aria-describedby="gate-b">
+  <div class="panel">
+    <p class="eyebrow">Private Portraiture by Jeff Lujan</p>
+    <h1 id="gate-h">For adults, by consideration.</h1>
+    <p id="gate-b">This portfolio includes mature artistic imagery. By entering, you confirm that you are at least 18 years old.</p>
+    <div class="actions">
+      <button id="enterBtn" class="btn">I am 18+ — Enter</button>
+      <a id="leaveBtn" class="btn ghost" href="https://www.google.com">Leave</a>
+    </div>
+    <p class="privacy">Your confirmation may be remembered on this device. No birth date is requested.</p>
+  </div>
+</div>
+
+<!-- ============ SITE ============ -->
+<div id="site">
+  <header class="site">
+    <div class="wrap bar">
+      <span class="brand">Jeff Lujan</span>
+      <nav class="main" aria-label="Primary">
+        <a href="#work">Selected Work</a>
+        <a href="#services">Services</a>
+        <a href="#inquiry">Request Consideration</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero wrap">
+      <p class="eyebrow">Selective Portrait Sessions</p>
+      <h1>Not every portrait begins with a booking.</h1>
+      <p>Jeff Lujan accepts portrait inquiries from adults seeking images with presence, restraint, and intent. Every request is reviewed for creative fit before a session is offered.</p>
+      <div class="actions">
+        <a class="btn" href="#inquiry">Request Consideration</a>
+        <a class="btn ghost" href="#work">View Selected Work</a>
+      </div>
+    </section>
+
+    <!-- POSITIONING STATEMENT -->
+    <section class="statement">
+      <div class="wrap">
+        <p>Portraiture should feel personal long before the shutter opens.</p>
+        <p class="sub">Jeff works with a considered number of clients across model portfolios, boudoir, actor headshots, and personal portraits. The process begins with a request, a purpose, and a conversation. Sessions are offered when the direction and collaboration are right.</p>
+      </div>
+    </section>
+
+    <!-- SELECTED WORK / CAROUSELS -->
+    <section id="work" class="section">
+      <div class="wrap">
+        <div class="head">
+          <p class="eyebrow">Selected Work</p>
+          <h2>Short, intentional sequences.</h2>
+          <p>Each set loads paused. Move at your own pace with the arrows, dots, keyboard, or swipe — or press Play to let it advance.</p>
+        </div>
+        <div id="carousels"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section" style="background:var(--bg-2);border-top:1px solid var(--line)">
+      <div class="wrap">
+        <div class="head">
+          <p class="eyebrow">Services</p>
+          <h2>Portrait sessions by consideration.</h2>
+        </div>
+        <div id="services-list"></div>
+      </div>
+    </section>
+
+    <!-- INQUIRY -->
+    <section id="inquiry" class="section inquiry">
+      <div class="wrap grid">
+        <div>
+          <p class="eyebrow">Begin with a request</p>
+          <h2>Begin with a request.</h2>
+          <p style="color:var(--muted);margin-top:1rem">Share what you need the images to accomplish, which type of session you are considering, and why this work feels right for you. Jeff reviews each inquiry personally. If the direction is a fit, you will be invited to a private consultation.</p>
+        </div>
+        <div>
+          <div class="proto-flag">Prototype — this form does not submit. A real submission workflow is not yet built.</div>
+          <form id="inquiryForm" novalidate>
+            <div class="field"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name"></div>
+            <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="f-service">Session type</label>
+              <select id="f-service">
+                <option>Model Portfolio</option>
+                <option>Boudoir</option>
+                <option>Actor Headshots</option>
+                <option>Personal Portrait</option>
+              </select>
+            </div>
+            <div class="field"><label for="f-msg">What should the images accomplish?</label><textarea id="f-msg" rows="4"></textarea></div>
+            <button type="submit" class="btn">Submit for Consideration</button>
+            <p id="formMsg" class="note" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap row">
+      <span>© <span id="yr"></span> Jeff Lujan — Private portraiture. Prototype for review.</span>
+      <button class="reset" id="resetGate">Clear my 18+ confirmation on this device</button>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var STORE_KEY = "jl_age_ok_v1";
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduceMotion) document.body.classList.add("reduce");
+
+  // ----- Data: sequences (no <img src> exists until the gate is passed) -----
+  var SEQUENCES = [
+    {id:"model", title:"Model Portfolios", desc:"Editorially directed images built around range, presence, and the work you want to attract.",
+     slides:[
+      {f:"model-01.jpg", alt:"Full-length editorial portrait in a black gown in a weathered doorway; sensitive areas softly blurred."},
+      {f:"model-02.jpg", alt:"Model in a strapless corset and jeans standing with visible tattoos against a warm wood backdrop."},
+      {f:"model-03.jpg", alt:"Model seated on a bed in editorial styling with red heels, full-length interior shot."},
+      {f:"model-04.jpg", alt:"Model leaning from an open car door holding a phone, cinematic editorial frame."},
+      {f:"model-05.jpg", alt:"Model in a knit top and long gloves, dramatic low-key lighting against a dark backdrop."},
+      {f:"model-06.jpg", alt:"Model in a black camisole, hands on hips, confident three-quarter pose in shadow."},
+      {f:"model-08.jpg", alt:"Model in a pink dress photographed full-length in a doorway, soft natural light."}
+     ]},
+    {id:"boudoir", title:"Boudoir", desc:"Private adult portraiture built on consent, discretion, and trust.",
+     slides:[
+      {f:"boudoir-01.jpg", alt:"Intimate low-key boudoir portrait with a visible chest tattoo; sensitive areas softly blurred."},
+      {f:"boudoir-03.jpg", alt:"Subject in a fitted black corset, elegant low-light boudoir portrait."},
+      {f:"boudoir-04.jpg", alt:"Artistic figure study with arms raised, soft warm tones; sensitive areas softly blurred."},
+      {f:"boudoir-05.jpg", alt:"Artistic figure study with a red neckpiece against a textured wall; sensitive areas softly blurred."},
+      {f:"boudoir-06.jpg", alt:"Artistic figure study beside a corrugated metal wall in natural daylight; sensitive areas softly blurred."}
+     ]},
+    {id:"headshot", title:"Actor Headshots", desc:"Focused images that communicate casting presence and range.",
+     slides:[
+      {f:"headshot-01.jpg", alt:"Tight beauty headshot, auburn hair, direct gaze, soft even lighting."},
+      {f:"headshot-02.jpg", alt:"Outdoor headshot in a dark green turtleneck, natural light, soft background."},
+      {f:"headshot-03.jpg", alt:"Natural-light portrait, hands near the neckline, bright airy tone."},
+      {f:"headshot-05.jpg", alt:"Headshot in a beige ribbed top, hand on shoulder, neutral gray backdrop."}
+     ]},
+    {id:"personal", title:"Personal Portraits", desc:"Distinctive portraits for dating profiles, social platforms, and personal presentation.",
+     slides:[
+      {f:"personal-01.jpg", alt:"Soft three-quarter portrait in a gray tank top, relaxed natural expression."},
+      {f:"personal-02.jpg", alt:"Energetic portrait in a blue tank top with arms raised, candid feel."},
+      {f:"personal-03.jpg", alt:"Outdoor portrait in a black turtleneck, natural light, blurred landscape behind."},
+      {f:"personal-04.jpg", alt:"Casual portrait in a gray top standing in an interior doorway."},
+      {f:"personal-05.jpg", alt:"Warm-toned moody portrait in a dark tank top against a shadowed background."},
+      {f:"personal-06.jpg", alt:"Full-length seated portrait on textured concrete, jeans, arms resting on knees."}
+     ]}
+  ];
+
+  var SERVICE_COPY = {
+    model:{action:"Request Portfolio Consideration", body:"For emerging and working models who need more than a collection of poses. Each portfolio is directed around range, presence, and the work you want to attract."},
+    boudoir:{action:"Request a Private Consultation", body:"Private adult portraiture built on consent, discretion, and trust. The result is intimate without becoming impersonal, and polished without losing the person in the frame."},
+    headshot:{action:"Request Headshot Consideration", body:"Headshots designed to hold attention and communicate casting presence. The session is focused, collaborative, and shaped around the roles you are prepared to pursue."},
+    personal:{action:"Request a Portrait Session", body:"For dating profiles, social platforms, and the moments when an ordinary snapshot no longer represents you. These are personal portraits with the clarity and intention of an editorial image."}
+  };
+
+  // Track the single carousel allowed to autoplay at once
+  var carousels = [];
+  function pauseOthers(except){ carousels.forEach(function(c){ if(c!==except) c.pause(); }); }
+
+  function buildCarousel(seq){
+    var root = document.createElement("section");
+    root.className = "carousel";
+    root.setAttribute("role","group");
+    root.setAttribute("aria-roledescription","carousel");
+    root.setAttribute("aria-label", seq.title);
+    root.tabIndex = 0;
+
+    var head = document.createElement("div");
+    head.className = "c-head";
+    head.innerHTML = '<span class="c-title">'+seq.title+'</span><span class="c-desc">'+seq.desc+'</span>';
+    root.appendChild(head);
+
+    var stage = document.createElement("div");
+    stage.className = "stage";
+    var total = seq.slides.length;
+    var imgs = seq.slides.map(function(s,i){
+      var im = document.createElement("img");
+      im.setAttribute("data-src","images/"+s.f); // src is set only after the gate passes
+      im.alt = s.alt;
+      im.setAttribute("aria-roledescription","slide");
+      im.setAttribute("aria-label",(i+1)+" of "+total);
+      if(i===0) im.className="active";
+      stage.appendChild(im);
+      return im;
+    });
+    var count = document.createElement("div");
+    count.className="count"; count.textContent = "1 / "+total;
+    stage.appendChild(count);
+
+    var prev = document.createElement("button");
+    prev.className="arrow prev"; prev.setAttribute("aria-label","Previous image"); prev.innerHTML="‹";
+    var next = document.createElement("button");
+    next.className="arrow next"; next.setAttribute("aria-label","Next image"); next.innerHTML="›";
+    stage.appendChild(prev); stage.appendChild(next);
+    root.appendChild(stage);
+
+    var progress = document.createElement("div");
+    progress.className="progress"; progress.innerHTML="<span></span>";
+    var bar = progress.firstChild;
+    root.appendChild(progress);
+
+    var controls = document.createElement("div");
+    controls.className="controls";
+    var dots = document.createElement("div");
+    dots.className="dots"; dots.setAttribute("role","tablist"); dots.setAttribute("aria-label",seq.title+" slides");
+    var dotBtns = seq.slides.map(function(s,i){
+      var wrap = document.createElement("span"); wrap.className="dot-tap";
+      var d = document.createElement("button");
+      d.className="dot"; d.setAttribute("aria-label","Go to image "+(i+1));
+      if(i===0) d.setAttribute("aria-current","true");
+      d.addEventListener("click", function(){ goTo(i, true); });
+      wrap.appendChild(d); dots.appendChild(wrap);
+      return d;
+    });
+    var play = document.createElement("button");
+    play.className="playbtn"; play.setAttribute("aria-pressed","false");
+    play.innerHTML = "▶ Play";
+    controls.appendChild(dots); controls.appendChild(play);
+    root.appendChild(controls);
+
+    var caption = document.createElement("div");
+    caption.className="caption"; caption.textContent = seq.slides[0].alt;
+    root.appendChild(caption);
+
+    var live = document.createElement("div");
+    live.className="sr-only"; live.setAttribute("aria-live","polite");
+    root.appendChild(live);
+
+    // ---- state & behavior ----
+    var idx = 0, playing = false, timer = null, rafStart = 0, rafId = null;
+    var INTERVAL = 5000;
+
+    function render(announce){
+      imgs.forEach(function(im,i){ im.classList.toggle("active", i===idx); });
+      dotBtns.forEach(function(d,i){ i===idx ? d.setAttribute("aria-current","true") : d.removeAttribute("aria-current"); });
+      count.textContent = (idx+1)+" / "+total;
+      caption.textContent = seq.slides[idx].alt;
+      if(announce) live.textContent = "Image "+(idx+1)+" of "+total+". "+seq.slides[idx].alt;
+    }
+    function goTo(i, manual){
+      idx = (i+total)%total;
+      if(manual) pause();           // manual navigation always stops autoplay
+      render(!!manual);             // announce only on manual navigation
+    }
+    function step(){ idx=(idx+1)%total; render(false); }
+
+    function tick(ts){
+      if(!playing) return;
+      if(!rafStart) rafStart = ts;
+      var elapsed = ts - rafStart;
+      bar.style.width = Math.min(100, (elapsed/INTERVAL)*100) + "%";
+      if(elapsed >= INTERVAL){ rafStart = ts; bar.style.width="0%"; step(); }
+      rafId = requestAnimationFrame(tick);
+    }
+    function play_(){
+      if(reduceMotion) return;      // reduced motion: never autoplay
+      pauseOthers(api);             // only one carousel plays at a time
+      playing = true; rafStart = 0; bar.style.width="0%";
+      play.innerHTML="❚❚ Pause"; play.setAttribute("aria-pressed","true");
+      rafId = requestAnimationFrame(tick);
+    }
+    function pause(){
+      playing = false; play.innerHTML="▶ Play"; play.setAttribute("aria-pressed","false");
+      bar.style.width="0%";
+      if(rafId) cancelAnimationFrame(rafId);
+    }
+    var api = { pause: pause, root: root, activate: activate };
+
+    // events
+    prev.addEventListener("click", function(){ goTo(idx-1, true); });
+    next.addEventListener("click", function(){ goTo(idx+1, true); });
+    play.addEventListener("click", function(){ playing ? pause() : play_(); });
+
+    root.addEventListener("keydown", function(e){
+      if(e.key==="ArrowLeft"){ e.preventDefault(); goTo(idx-1,true); }
+      else if(e.key==="ArrowRight"){ e.preventDefault(); goTo(idx+1,true); }
+      else if(e.key==="Home"){ e.preventDefault(); goTo(0,true); }
+      else if(e.key==="End"){ e.preventDefault(); goTo(total-1,true); }
+    });
+
+    // pause on hover over the stage and on focus within controls
+    stage.addEventListener("mouseenter", function(){ if(playing) pause(); });
+    root.addEventListener("focusin", function(){ if(playing) pause(); });
+
+    // swipe / pointer drag
+    var startX=null;
+    stage.addEventListener("pointerdown", function(e){ startX=e.clientX; });
+    stage.addEventListener("pointerup", function(e){
+      if(startX===null) return;
+      var dx = e.clientX-startX; startX=null;
+      if(Math.abs(dx)>40) goTo(idx + (dx<0?1:-1), true);
+    });
+
+    if(reduceMotion){ play.style.display="none"; progress.style.display="none"; }
+
+    function activate(){ // called after gate: load images
+      imgs.forEach(function(im,i){
+        if(i<=1){ im.src = im.getAttribute("data-src"); }   // load current + next only
+      });
+    }
+    // when an image becomes active, lazily load it and the next one
+    var origGoTo = goTo;
+    goTo = function(i, manual){
+      origGoTo(i, manual);
+      [idx, (idx+1)%total].forEach(function(n){
+        if(!imgs[n].src) imgs[n].src = imgs[n].getAttribute("data-src");
+      });
+    };
+    var origStep = step;
+    step = function(){ origStep(); var n=(idx+1)%total; if(!imgs[n].src) imgs[n].src=imgs[n].getAttribute("data-src"); };
+
+    carousels.push(api);
+    return root;
+  }
+
+  function buildServices(){
+    var host = document.getElementById("services-list");
+    SEQUENCES.forEach(function(seq){
+      var c = SERVICE_COPY[seq.id];
+      var block = document.createElement("div");
+      block.style.cssText="border-top:1px solid var(--line);padding:2rem 0;display:grid;grid-template-columns:1fr 2fr;gap:2rem";
+      block.innerHTML =
+        '<h3 style="font-size:1.5rem">'+seq.title+'</h3>'+
+        '<div><p style="color:var(--muted);margin:0 0 1.2rem">'+c.body+'</p>'+
+        '<a class="btn ghost" href="#inquiry">'+c.action+'</a></div>';
+      host.appendChild(block);
+    });
+    var s=document.createElement("style");
+    s.textContent="@media(max-width:680px){#services-list>div{grid-template-columns:1fr!important}}";
+    document.head.appendChild(s);
+  }
+
+  function initSite(){
+    var host = document.getElementById("carousels");
+    SEQUENCES.forEach(function(seq){ host.appendChild(buildCarousel(seq)); });
+    buildServices();
+    carousels.forEach(function(c){ c.activate(); });
+    document.getElementById("yr").textContent = new Date().getFullYear();
+  }
+
+  // pause everything when the tab loses visibility
+  document.addEventListener("visibilitychange", function(){
+    if(document.hidden) carousels.forEach(function(c){ c.pause(); });
+  });
+
+  // ----- Gate logic (fails closed) -----
+  function enter(persist){
+    if(persist){ try{ localStorage.setItem(STORE_KEY,"1"); }catch(e){} }
+    document.body.classList.remove("locked");
+    document.body.classList.add("entered");
+    if(!window.__siteBuilt){ initSite(); window.__siteBuilt = true; }
+  }
+  function isConfirmed(){
+    try{ return localStorage.getItem(STORE_KEY)==="1"; }catch(e){ return false; }
+  }
+
+  document.getElementById("enterBtn").addEventListener("click", function(){ enter(true); });
+  document.getElementById("resetGate").addEventListener("click", function(){
+    try{ localStorage.removeItem(STORE_KEY); }catch(e){}
+    location.reload();
+  });
+  document.getElementById("inquiryForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    document.getElementById("formMsg").textContent =
+      "Prototype only — nothing was sent. Your request would be reviewed and, if the direction aligns, you would receive an invitation to continue.";
+  });
+
+  // Fail closed: only auto-enter if a valid stored confirmation exists.
+  if(isConfirmed()){ enter(false); }
+  else { document.getElementById("enterBtn").focus(); }
+})();
+</script>
+</body>
+</html>
